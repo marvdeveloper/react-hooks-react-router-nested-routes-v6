@@ -1,3 +1,5 @@
+// routes.js
+import App from "./App"; // Import App layout component
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Login from "./pages/Login";
@@ -7,24 +9,27 @@ import ErrorPage from "./pages/ErrorPage";
 const routes = [
   {
     path: "/",
-    element: <Home />,
-    errorElement: <ErrorPage />
-  }, 
-  {
-    path: "/about",
-    element: <About />,
-    errorElement: <ErrorPage />
+    element: <App />, // This is now the layout for all routes
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true, // This means path = "/"
+        element: <Home />,
+      },
+      {
+        path: "about",
+        element: <About />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "profile/:id",
+        element: <UserProfile />,
+      },
+    ],
   },
-  {
-    path: "/login",
-    element: <Login />,
-    errorElement: <ErrorPage />
-  },
-  {
-    path: "/profile/:id",
-    element: <UserProfile />,
-    errorElement: <ErrorPage />
-  }
 ];
 
 export default routes;
